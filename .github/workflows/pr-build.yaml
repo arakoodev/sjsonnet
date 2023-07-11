@@ -42,7 +42,7 @@ jobs:
       - name: Run sbt tests
         run: sbt test
       - name: Run sbt build
-        run: sbt build
+        run: sbt main
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
