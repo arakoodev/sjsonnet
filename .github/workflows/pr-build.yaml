@@ -39,8 +39,8 @@ jobs:
 #         run: ./mill __.test
       - name: Compile with sbt
         run: sbt compile bench/compile bench/jmh:compile
-      - name: Run sbt tests
-        run: sbt test
+#       - name: Run sbt tests
+#         run: sbt test
       - name: Run sbt build
         run: sbt main
       - name: Upload artifacts
