@@ -16,9 +16,33 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+      - name: Cache sbt
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.sbt
+            ~/.ivy2/cache
+            ~/.coursier/cache/v1
+            ~/.cache/coursier/v1
+            ~/AppData/Local/Coursier/Cache/v1
+            ~/Library/Caches/Coursier/v1
+          key: ${{ runner.os }}-sbt-cache-v2-${{ hashFiles('**/*.sbt') }}-${{ hashFiles('project/build.properties') }}
+      - name: Cache project
+        uses: actions/cache@v3
+        with:
+          path: |
+            **/target/**
+            !**/test-results/**
+          key: ${{ format('{0}-project-{1}-{2}', runner.os, github.base_ref, github.run_number) }}
+          restore-keys: ${{ inputs.preserve-cache-between-runs && format('{0}-project-{1}-', runner.os, github.base_ref) || format('{0}-project-{1}-{2}', runner.os, github.base_ref, github.run_number) }}
       - name: Run mill tests
         run: ./mill __.test
       - name: Compile with sbt
         run: sbt compile bench/compile bench/jmh:compile
       - name: Run sbt tests
         run: sbt test
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+         name: sjsonnet
+         path: target/
