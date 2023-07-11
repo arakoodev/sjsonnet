@@ -35,8 +35,8 @@ jobs:
             !**/test-results/**
           key: ${{ format('{0}-project-{1}-{2}', runner.os, github.base_ref, github.run_number) }}
           restore-keys: ${{ inputs.preserve-cache-between-runs && format('{0}-project-{1}-', runner.os, github.base_ref) || format('{0}-project-{1}-{2}', runner.os, github.base_ref, github.run_number) }}
-      - name: Run mill tests
-        run: ./mill __.test
+#       - name: Run mill tests
+#         run: ./mill __.test
       - name: Compile with sbt
         run: sbt compile bench/compile bench/jmh:compile
       - name: Run sbt tests
