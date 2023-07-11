@@ -48,3 +48,8 @@ jobs:
         with:
          name: sjsonnet
          path: out/
+      - name: Upload jar
+        uses: actions/upload-artifact@v3
+        with:
+         name: sjsonnet-jar
+         path: out/sjsonnet/2.13.4/jvm/assembly.dest/out.jar
