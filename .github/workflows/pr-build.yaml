@@ -41,6 +41,8 @@ jobs:
         run: sbt compile bench/compile bench/jmh:compile
       - name: Run sbt tests
         run: sbt test
+      - name: Run sbt build
+        run: sbt build
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
