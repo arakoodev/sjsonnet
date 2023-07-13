@@ -42,7 +42,7 @@ jobs:
 #       - name: Run sbt tests
 #         run: sbt test
       - name: Run sbt build
-        run: ./mill show sjsonnet[2.13.0].assembly
+        run: ./mill show sjsonnet[2.13.4].assembly
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
