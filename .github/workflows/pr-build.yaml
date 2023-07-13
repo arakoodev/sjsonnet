@@ -45,13 +45,18 @@ jobs:
         run: ./mill show sjsonnet[2.13.4].jvm.assembly
       - name: Run sbt build
         run: ./mill show sjsonnet[2.13.4].native.assembly
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-         name: sjsonnet
-         path: out/
-      - name: Upload jar
+#       - name: Upload artifacts
+#         uses: actions/upload-artifact@v3
+#         with:
+#          name: sjsonnet
+#          path: out/
+      - name: Upload jvm jar
         uses: actions/upload-artifact@v3
         with:
          name: sjsonnet-jar
          path: out/sjsonnet/2.13.4/jvm/assembly.dest/out.jar
+      - name: Upload client jar
+        uses: actions/upload-artifact@v3
+        with:
+         name: sjsonnet-native-jar
+         path: out/sjsonnet/2.13.4/native/assembly.dest/out.jar
